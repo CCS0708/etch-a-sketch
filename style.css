@@ -29,3 +29,6 @@ body {
 .square.hover {
   background-color: black;
 }
+button {
+  padding: 8px 16px;
+}

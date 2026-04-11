@@ -40,14 +40,6 @@ function renderGrid() {
   }
 }
 
-function addHover() {
-  const squares = document.querySelectorAll('.square');
-  squares.forEach((square) => {
-    square.addEventListener('mouseenter', (e) => {
-      square.classList.add('hover');
-    })
-  })
-}
 
 
 
