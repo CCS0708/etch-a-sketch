@@ -16,19 +16,25 @@ body {
   height: 70vw;
   max-width: 90vh;
   max-height: 90vh;
-  
+  border: 1px solid black;
 }
 
 .square {
   box-sizing: border-box;
   width: var(--side);
   height: var(--side);
-  border: 1px solid black;
+  /* border: 1px solid black; */
   flex: 0 0 auto;
 }
-.square.hover {
-  background-color: black;
-}
+
 button {
   padding: 8px 16px;
+}
+button.color, .darkening {
+  background-color: rgb(200, 200, 200);
+}
+.size {
+  display: flex;
+  justify-content: center;
+  font-size: 24px;
 }
