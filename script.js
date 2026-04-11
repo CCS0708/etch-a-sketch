@@ -6,6 +6,9 @@ btnSize.addEventListener('click', (e) => {
   if (size > 100) {
     alert('Maximum 100 squares per side');
     size = 100;
+  } else if (size < 0) {
+    size = 16;
+    alert('Cannot be negative number')
   }
   renderGrid();
 })
