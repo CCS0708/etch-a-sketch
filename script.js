@@ -28,37 +28,37 @@ btnToggleDarkening.addEventListener('click', (e) => {
   btnToggleDarkening.classList.toggle('darkening');
 })
 
+let mouseDown = false;
+const container = document.querySelector('.container');
+document.body.addEventListener('mousedown', (e) => {
+  e.preventDefault();
+  mouseDown = true;
+})
+document.body.addEventListener('mouseup', () => {
+  mouseDown = false;
+})
+
 renderGrid();
 
 function renderGrid() {
   const sizeDisplay = document.querySelector('.size');
   sizeDisplay.textContent = `Size: ${size} x ${size}`;
-  
-  const container = document.querySelector('.container');
+
   container.innerHTML = '';
 
-  const sidePercent = 100 / size; 
+  const sidePercent = 100 / size;
 
   for (let i = 0; i < (size * size); i++) {
     const square = document.createElement('div');
     square.classList.add('square');
     square.style.setProperty('--side', `${sidePercent}%`);
 
-    square.addEventListener('mouseenter', (e) => {
-      const color = btnToggleColor.classList.contains('color');
-      const darken = btnToggleDarkening.classList.contains('darkening');
-      const background = square.style.backgroundColor;
-      if (background) {
-
-      } else if (color) {
-        bgChange(square);
-      } else {
-        square.style.backgroundColor = 'black';
-      }
-      if (darken) {
-        opacityChange(square);
-      }
-
+    square.addEventListener('mouseover', () => {
+      changeColorSketch(square);
+    })
+    square.addEventListener('mousedown', () => {
+      mouseDown = true;
+      changeColorSketch(square);
     })
 
     container.appendChild(square);
@@ -68,7 +68,7 @@ function random(number) {
   return Math.floor(Math.random() * (number + 1));
 }
 function bgChange(element) {
-  
+
   const rndCol = `rgb(${random(255)} ${random(255)} ${random(255)})`;
   element.style.backgroundColor = rndCol;
 }
@@ -79,5 +79,21 @@ function opacityChange(element) {
     element.style.opacity = '0.5';
   } else {
     element.style.opacity = `${opacity >= 1 ? 1 : (opacity + 0.1)}`;
+  }
+}
+
+function changeColorSketch(square) {
+  if (!mouseDown) { return; }
+
+  const color = btnToggleColor.classList.contains('color');
+  const darken = btnToggleDarkening.classList.contains('darkening');
+
+  if (color) {
+    bgChange(square);
+  } else {
+    square.style.backgroundColor = 'black';
+  }
+  if (darken) {
+    opacityChange(square);
   }
 }
